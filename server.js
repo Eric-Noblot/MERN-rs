@@ -1,10 +1,13 @@
 //npm start
-
+// bernard pass : test33
 const express = require("express");
 const userRoutes = require("./routes/user.routes.js");
+const cookieParser = require("cookie-parser")
 
 require("dotenv").config({ path: "./config/.env" });
 require("./config/db");
+
+const {checkUser, requireAuth} = require("./middleware/auth.middleware.js")
 const app = express();
 
 app.use((req, res, next) => {
@@ -20,8 +23,15 @@ app.use((req, res, next) => {
   next();
 });
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser())
+
+app.get("*", checkUser) 
+app.get("/jwtid", requireAuth, (req, res) => {
+  res.status(200).send(res.locals.user._id)
+})
 
 app.use("/api/user", userRoutes);
 

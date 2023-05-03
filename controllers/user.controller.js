@@ -67,23 +67,23 @@ module.exports.updateOneUser = async (req, res, next) => {
 //         await UserModel.remove({_id: req.params.id}).exec()
 //         res.status(200).json({ message: "Successfully deleted !"})
 //     } catch(err) {
-//         return res.status(500).json({message: err})
+//         return res.status(400).json({message: err})
 //     }
 // }
 
-module.exports.deleteOneUser = (req, res, next) => {
-  UserModel.findOne({ _id: req.params.id })
-    .then((user) => {
-      UserModel.deleteOne({ _id: req.params.id })
-        .then(() => {
-          res.status(200).json({ message: "Objet supprimé !" });
-        })
-        .catch((error) => res.status(401).json({ error }));
-    })
-    .catch((error) => {
-      res.status(500).json({ error });
-    });
-};
+// module.exports.deleteOneUser = (req, res, next) => {
+//   UserModel.findOne({ _id: req.params.id })
+//     .then((user) => {
+//       UserModel.deleteOne({ _id: req.params.id })
+//         .then(() => {
+//           res.status(200).json({ message: "Objet supprimé !" });
+//         })
+//         .catch((error) => res.status(401).json({ error }));
+//     })
+//     .catch((error) => {
+//       res.status(500).json({ error });
+//     });
+// };  
 
     // FOLLOW / UNFOLLOW
 

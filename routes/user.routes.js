@@ -3,6 +3,8 @@ const authController = require("../controllers/auth.controller")
 const userController = require("../controllers/user.controller")
 //auth
 router.post("/register", authController.signUp) //router permet de récupérer le chemin de l'url avec register (app.use("api/user", userRoutes) dans server.js)
+router.post("/login", authController.signIn)
+router.get("/logout", authController.logout)
 
 //user
 router.get("/", userController.getAllUsers)

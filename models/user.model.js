@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema (
             type: String,
             required: true,
             max: 1024,
-            minLength: 6,
+            minlength: 6,
         },
         picture: {
             type: String,
@@ -55,6 +55,22 @@ userSchema.pre("save", async function(next) { //pre save signifie avant d'enregi
     next()
 })
 
-const UserModel = mongoose.model("user", userSchema) 
+userSchema.statics.login = async function(email, password) {
+    const user = await this.findOne({ email })
+    if (user) {
+        const auth = await bcrypt.compare(password, user.password)
+        if (auth) {
+            return user
+        }
+        throw Error("incorrect password")
+    }
+    throw Error("incorrect email")
+}
+// on crée le UserSchema statics car quand on envoie une requete de login via postman ca ne marche pas car le mot
+// de passe qu'on rentre (eric33 par ex) n'est pas le meme qui est présent dans la base de donnée(il a été salé)
+// On récupère donc dans une fonction l'email de la requete (qui est unique), et on compare le mdp de l'user avec le salé
+// grace a bcrypt.compare qui lui sait de quelle origine vient le hash
 
+
+const UserModel = mongoose.model("user", userSchema) 
 module.exports = UserModel
