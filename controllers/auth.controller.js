@@ -12,7 +12,7 @@ const createToken = (id) => {
 
 module.exports.signUp = async (req, res, next) => {
     console.log(req.body)
-    const {pseudo, email, password} = req.body
+    const {pseudo, email, password} = req.body               // pour le POST {"pseudo", "email", "password"}
 
     try{
         const user = await UserModel.create({ pseudo, email, password })
@@ -26,7 +26,7 @@ module.exports.signUp = async (req, res, next) => {
 
 
 module.exports.signIn = async (req, res) => {
-    const { email, password } = req.body
+    const { email, password } = req.body         // pour le POST {"email", "password"}
 
     try{
         const user = await UserModel.login(email, password)
