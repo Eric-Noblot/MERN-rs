@@ -34,3 +34,16 @@ module.exports.signInErrors = (err) => {
 
     return errors
 }
+
+module.exports.uploadErrors = (err) => {
+
+    let errors = {format: "", maxSize: ""}          //c'est le format qu'on revoie dans err si on postman
+
+    if (err.message.includes("invalid file")) 
+    errors.format = "Format incompatible"
+
+    if (err.message.includes("max size"))
+    errors.maxSize = "Le fichier dépasse 500ko"
+          
+    return errors
+}

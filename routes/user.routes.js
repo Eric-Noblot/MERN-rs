@@ -19,7 +19,7 @@ router.patch("/follow/:id", userController.follow)
 //router.patch("/unfollow/:id", userController.unfollow)
 
 //upload
-router.post("./upload", upload.single("file"), uploadController.uploadProfil) // on passe d'abord par une fonction multer avant d'aller dans le controller
+router.post("/upload", upload.single("file"), uploadController.uploadProfil) // on passe d'abord par une middleware multer avant d'aller dans le controller
 
 module.exports = router 
 

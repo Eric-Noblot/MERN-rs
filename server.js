@@ -1,7 +1,7 @@
 //npm start
 // bernard pass : test33
+//youtube - finri a 4h18 pour multer
 
-//youtube : 3h17
 const express = require("express");
 const userRoutes = require("./routes/user.routes");
 const postRoutes = require("./routes/post.routes")
